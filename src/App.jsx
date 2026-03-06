@@ -67,6 +67,13 @@ const App = () => {
   };
 
   /**
+   * Очищает все выполненные задачи
+   */
+  const clearCompletedTodos = () => {
+    setTodos(todos.filter(todo => !todo.completed));
+  };
+
+  /**
    * Фильтрует список задач в зависимости от текущего фильтра
    */
   const getFilteredTodos = () => {
@@ -136,6 +143,15 @@ const App = () => {
             >
               Выполненные
             </button>
+            {completedTodoCount > 0 && (
+              <button
+                className="filter-btn clear-btn"
+                onClick={clearCompletedTodos}
+                title="Удалить все выполненные задачи"
+              >
+                🗑️ Очистить выполненные
+              </button>
+            )}
           </div>
 
           {/* Список задач */}
