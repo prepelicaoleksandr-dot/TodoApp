@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 /**
  * TodoForm Component - Форма для добавления новых задач
- * 
+ *
  * Функциональность:
  * - Ввод названия задачи (обязательное поле)
  * - Ввод описания задачи (опционально)
@@ -22,7 +22,7 @@ const TodoForm = ({ onAddTodo }) => {
    */
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Очищаем предыдущие сообщения об ошибках
     setError('');
 
@@ -88,7 +88,7 @@ const TodoForm = ({ onAddTodo }) => {
       )}
 
       <button type="submit" className="form-submit">
-        ➕ Добавить задачу
+        + Добавить задачу
       </button>
     </form>
   );

@@ -2,21 +2,21 @@
 // Todo App - SCSS Стили
 // ============================================
 
-// Переменные для цветовой схемы
-$primary-color: #6366f1;      // Indigo
-$primary-light: #e0e7ff;      // Light Indigo
-$primary-dark: #4f46e5;       // Dark Indigo
-$success-color: #10b981;      // Green
-$danger-color: #ef4444;       // Red
-$warning-color: #f59e0b;      // Amber
-$text-dark: #1f2937;          // Dark Gray
-$text-light: #6b7280;         // Light Gray
-$bg-light: #f3f4f6;           // Light Background
-$bg-white: #ffffff;           // White
-$border-color: #e5e7eb;       // Border Gray
-$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-$shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+// Переменные для темной стилизации
+$primary-color: #ffffff;      // белый текст/акценты
+$primary-light: #bbbbbb;      // светло-серый для hover и фоновых элементов
+$primary-dark: #999999;       // темно-серый оттенок
+$success-color: #4caf50;      // зеленый (для успешных статусов)
+$danger-color: #f44336;       // красный (для удаления/ошибок)
+$warning-color: #ffeb3b;      // желтый для предупреждений
+$text-dark: #ffffff;          // основной светлый текст
+$text-light: #bbbbbb;         // второстепенный текст
+$bg-light: #2a2a2a;           // темно-серый фон для карточек
+$bg-white: #1e1e1e;           // почти черный
+$border-color: #444444;       // темный бордер
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+$shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
 
 // Анимации
 @keyframes slideInDown {
@@ -97,10 +97,12 @@ html {
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* стильный темный фон */
+  background: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
   min-height: 100vh;
   color: $text-dark;
   overflow-x: hidden;
+  /* фильтр больше не нужен */
 }
 
 // ============================================
@@ -205,8 +207,8 @@ body {
 
   .filter-btn {
     padding: 10px 20px;
-    background: $bg-white;
-    color: $text-dark;
+    background: $bg-light;
+    color: $text-light;
     border: 2px solid $border-color;
     border-radius: 8px;
     cursor: pointer;
@@ -215,30 +217,30 @@ body {
     font-size: 0.95rem;
 
     &:hover {
-      border-color: $primary-color;
-      color: $primary-color;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-      background: #f3f4f6;
+      border-color: $primary-light;
+      color: $primary-light;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+      background: darken($bg-light, 5%);
     }
 
     &.active {
-      background: $primary-color;
-      color: white;
-      border-color: $primary-color;
+      background: $primary-light;
+      color: $text-dark;
+      border-color: $primary-light;
       box-shadow: $shadow-md;
     }
 
     &.clear-btn {
-      background: #fef2f2;
+      background: darken($bg-light, 10%);
       border-color: $danger-color;
       color: $danger-color;
       margin-left: auto;
 
       &:hover {
-        background: #fee2e2;
-        border-color: #dc2626;
-        color: #dc2626;
-        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        background: lighten($bg-light, 5%);
+        border-color: darken($danger-color, 10%);
+        color: darken($danger-color, 10%);
+        box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
       }
     }
   }
@@ -304,13 +306,14 @@ body {
     font-size: 1rem;
     font-family: inherit;
     transition: all 0.3s ease;
-    color: $text-dark;
+    color: $text-light;
+    background: $bg-light;
 
     &:focus {
       outline: none;
-      border-color: $primary-color;
-      box-shadow: 0 0 0 3px $primary-light;
-      background: lighten($bg-white, 2%);
+      border-color: $primary-light;
+      box-shadow: 0 0 0 3px $primary-dark;
+      background: darken($bg-light, 5%);
     }
 
     &::placeholder {
@@ -329,7 +332,7 @@ body {
     right: 15px;
     font-size: 0.75rem;
     color: $text-light;
-    background: $bg-white;
+    background: $bg-light;
     padding: 2px 4px;
   }
 
@@ -358,8 +361,8 @@ body {
   .form-submit {
     width: 100%;
     padding: 14px;
-    background: linear-gradient(135deg, $primary-color 0%, $primary-dark 100%);
-    color: white;
+    background: $bg-light;
+    color: $text-dark;
     border: none;
     border-radius: 8px;
     font-size: 1rem;
@@ -371,7 +374,7 @@ body {
     margin-top: 10px;
 
     &:hover {
-      background: linear-gradient(135deg, #5b5aee 0%, #4636d4 100%);
+      background: lighten($bg-light, 10%);
       box-shadow: $shadow-lg;
     }
 
@@ -522,7 +525,7 @@ body {
     border: none;
     border-radius: 6px;
     background: $bg-light;
-    color: $text-dark;
+    color: $text-light;
     cursor: pointer;
     font-size: 1.2rem;
     transition: all 0.3s ease;
@@ -532,7 +535,8 @@ body {
 
     &:hover {
       box-shadow: $shadow-md;
-      border: 1px solid #ddd;
+      border: 1px solid $border-color;
+      background: darken($bg-light, 5%);
     }
 
     &:active {
