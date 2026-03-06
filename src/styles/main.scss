@@ -415,10 +415,20 @@ body {
   border-left: 4px solid $primary-color;
   animation: slideInUp 0.4s ease-out;
 
+  /* ensure text stays visible on dark hover */
+  color: $text-light;
+
   &:hover {
     box-shadow: $shadow-md;
-    border-left: 4px solid #4f46e5;
-    background: #fafbff;
+    border-left: 4px solid $primary-light;
+    background: darken($bg-white, 5%);
+    color: $text-dark;
+
+    .todo-title,
+    .todo-description,
+    .todo-date {
+      color: $text-dark;
+    }
   }
 
   &.completed {
