@@ -1,0 +1,731 @@
+// ============================================
+// Todo App - SCSS Стили
+// ============================================
+
+// Переменные для цветовой схемы
+$primary-color: #6366f1;      // Indigo
+$primary-light: #e0e7ff;      // Light Indigo
+$primary-dark: #4f46e5;       // Dark Indigo
+$success-color: #10b981;      // Green
+$danger-color: #ef4444;       // Red
+$warning-color: #f59e0b;      // Amber
+$text-dark: #1f2937;          // Dark Gray
+$text-light: #6b7280;         // Light Gray
+$bg-light: #f3f4f6;           // Light Background
+$bg-white: #ffffff;           // White
+$border-color: #e5e7eb;       // Border Gray
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+// Анимации
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Глобальные стили
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: $text-dark;
+  overflow-x: hidden;
+}
+
+// ============================================
+// App Component стили
+// ============================================
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 20px;
+}
+
+// Заголовок приложения
+.app-header {
+  text-align: center;
+  color: white;
+  padding: 40px 20px 30px;
+  animation: slideInDown 0.6s ease-out;
+
+  .app-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .app-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+}
+
+// Основная область содержимого
+.app-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  animation: slideInUp 0.6s ease-out 0.2s both;
+}
+
+// Статистика
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin: 25px 0;
+
+  .stat {
+    background: $bg-white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: $shadow-sm;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: $shadow-md;
+      border-color: $primary-color;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: $text-light;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: $primary-color;
+
+      &.active {
+        color: $warning-color;
+      }
+
+      &.completed {
+        color: $success-color;
+      }
+    }
+  }
+}
+
+// Фильтры
+.filters {
+  display: flex;
+  gap: 10px;
+  margin: 25px 0;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .filter-btn {
+    padding: 10px 20px;
+    background: $bg-white;
+    color: $text-dark;
+    border: 2px solid $border-color;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+
+    &:hover {
+      border-color: $primary-color;
+      color: $primary-color;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      background: #f3f4f6;
+    }
+
+    &.active {
+      background: $primary-color;
+      color: white;
+      border-color: $primary-color;
+      box-shadow: $shadow-md;
+    }
+  }
+}
+
+// Состояние пусто
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: $bg-white;
+  border-radius: 12px;
+  box-shadow: $shadow-sm;
+  animation: fadeIn 0.4s ease-out;
+
+  .empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .empty-state-text {
+    font-size: 1.2rem;
+    color: $text-light;
+  }
+}
+
+// Подвал
+.app-footer {
+  text-align: center;
+  padding: 30px 20px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  margin-top: 40px;
+}
+
+// ============================================
+// TodoForm Component стили
+// ============================================
+
+.todo-form {
+  background: $bg-white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: $shadow-md;
+  margin-bottom: 30px;
+  animation: bounceIn 0.5s ease-out;
+
+  .form-group {
+    margin-bottom: 20px;
+    position: relative;
+
+    &:last-of-type {
+      margin-bottom: 15px;
+    }
+  }
+
+  .form-input,
+  .form-textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid $border-color;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    color: $text-dark;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px $primary-light;
+      background: lighten($bg-white, 2%);
+    }
+
+    &::placeholder {
+      color: $text-light;
+    }
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .char-count {
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    font-size: 0.75rem;
+    color: $text-light;
+    background: $bg-white;
+    padding: 2px 4px;
+  }
+
+  .form-error {
+    padding: 12px 15px;
+    background: #fee2e2;
+    color: $danger-color;
+    border-left: 4px solid $danger-color;
+    border-radius: 4px;
+    margin: 15px 0;
+    animation: slideInDown 0.3s ease-out;
+    font-weight: 500;
+  }
+
+  .form-success {
+    padding: 12px 15px;
+    background: #dcfce7;
+    color: $success-color;
+    border-left: 4px solid $success-color;
+    border-radius: 4px;
+    margin: 15px 0;
+    animation: slideInDown 0.3s ease-out;
+    font-weight: 500;
+  }
+
+  .form-submit {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, $primary-color 0%, $primary-dark 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+
+    &:hover {
+      background: linear-gradient(135deg, #5b5aee 0%, #4636d4 100%);
+      box-shadow: $shadow-lg;
+    }
+
+    &:active {
+      opacity: 0.9;
+    }
+  }
+}
+
+// ============================================
+// TodoList Component стили
+// ============================================
+
+.todo-list {
+  margin: 30px 0;
+}
+
+.todo-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+// ============================================
+// TodoItem Component стили
+// ============================================
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: $bg-white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: $shadow-sm;
+  transition: all 0.3s ease;
+  border-left: 4px solid $primary-color;
+  animation: slideInUp 0.4s ease-out;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    border-left: 4px solid #4f46e5;
+    background: #fafbff;
+  }
+
+  &.completed {
+    background: $bg-light;
+    border-left-color: $success-color;
+    opacity: 0.7;
+
+    .todo-title {
+      text-decoration: line-through;
+      color: $text-light;
+    }
+
+    .todo-checkbox {
+      border-color: $success-color;
+      background: $success-color;
+
+      &:after {
+        content: '✓';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &.deleting {
+    animation: slideOut 0.3s ease-out forwards;
+  }
+
+  .todo-item-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    flex: 1;
+  }
+
+  .todo-checkbox {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    margin-top: 2px;
+    cursor: pointer;
+    appearance: none;
+    border: 2px solid $border-color;
+    border-radius: 6px;
+    background: $bg-white;
+    transition: all 0.3s ease;
+    position: relative;
+
+    &:hover {
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+      background: #f0f4ff;
+    }
+
+    &:checked {
+      background: $primary-color;
+      border-color: $primary-color;
+    }
+  }
+
+  .todo-info {
+    flex: 1;
+  }
+
+  .todo-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: $text-dark;
+    word-break: break-word;
+  }
+
+  .todo-description {
+    font-size: 0.95rem;
+    color: $text-light;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+
+  .todo-date {
+    font-size: 0.8rem;
+    color: $text-light;
+    display: block;
+  }
+
+  .todo-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: 15px;
+    flex-shrink: 0;
+  }
+
+  .btn-complete,
+  .btn-delete {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    background: $bg-light;
+    color: $text-dark;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      box-shadow: $shadow-md;
+      border: 1px solid #ddd;
+    }
+
+    &:active {
+      opacity: 0.8;
+    }
+  }
+
+  .btn-complete {
+    &:hover {
+      background: $primary-light;
+      color: $primary-color;
+    }
+  }
+
+  .btn-delete {
+    &:hover {
+      background: #fee2e2;
+      color: $danger-color;
+    }
+  }
+}
+
+// ============================================
+// Адаптивность для мобильных устройств
+// ============================================
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 30px 15px 20px;
+
+    .app-title {
+      font-size: 2rem;
+    }
+
+    .app-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  .app-container {
+    padding: 0;
+  }
+
+  .stats-container {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    margin: 20px 0;
+
+    .stat {
+      padding: 15px;
+
+      .stat-value {
+        font-size: 1.5rem;
+      }
+
+      .stat-label {
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  .filters {
+    margin: 20px 0;
+    gap: 8px;
+
+    .filter-btn {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      flex: 1;
+    }
+  }
+
+  .todo-form {
+    padding: 20px;
+    margin-bottom: 20px;
+
+    .form-input,
+    .form-textarea {
+      font-size: 16px; // Предотвращает зум на iOS
+    }
+  }
+
+  .todo-item {
+    padding: 15px;
+    flex-direction: column;
+    gap: 15px;
+
+    .todo-item-content {
+      width: 100%;
+    }
+
+    .todo-actions {
+      width: 100%;
+      margin-left: 0;
+      gap: 10px;
+
+      button {
+        flex: 1;
+      }
+    }
+  }
+
+  .empty-state {
+    padding: 40px 15px;
+
+    .empty-state-icon {
+      font-size: 3rem;
+    }
+
+    .empty-state-text {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 20px 10px;
+
+    .app-title {
+      font-size: 1.5rem;
+    }
+
+    .app-subtitle {
+      font-size: 0.9rem;
+    }
+  }
+
+  .stats-container {
+    grid-template-columns: 1fr;
+    margin: 15px 0;
+  }
+
+  .filters {
+    flex-direction: column;
+
+    .filter-btn {
+      width: 100%;
+    }
+  }
+
+  .todo-form {
+    padding: 15px;
+    border-radius: 10px;
+
+    .form-submit {
+      padding: 12px;
+      font-size: 0.95rem;
+    }
+  }
+
+  .todo-item {
+    padding: 12px;
+
+    .todo-title {
+      font-size: 1rem;
+    }
+
+    .todo-description {
+      font-size: 0.9rem;
+    }
+
+    .btn-complete,
+    .btn-delete {
+      width: 32px;
+      height: 32px;
+      font-size: 1rem;
+    }
+  }
+
+  .app-footer {
+    font-size: 0.85rem;
+    padding: 20px 10px;
+  }
+}
+
+// ============================================
+// Дополнительные утилиты и эффекты
+// ============================================
+
+// Доступность для пользователей, предпочитающих уменьшенное движение
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Высокая контрастность для пользователей со слабым зрением
+@media (prefers-contrast: more) {
+  .app-header {
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .filter-btn {
+    font-weight: 700;
+
+    &.active {
+      text-decoration: underline;
+    }
+  }
+
+  .todo-form .form-submit {
+    font-weight: 700;
+  }
+}
